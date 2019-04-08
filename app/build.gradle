@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 5
+ext.minimumSdkVersion = 21
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.android.nytimes"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode generateVersionCode()
+        versionName generateVersionName()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", "\"https://api.nytimes.com/svc/mostpopular/v2/\""
+        buildConfigField "String", "API_KEY", "\"ZHhZNjp0WApivGr8GACAUXnSXi57eAOj\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+
+    dataBinding { //data binding enabled
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    /*Android Support Lib*/
+    implementation supportDependencies.appCompat
+    /*Android Design Support Lib*/
+    implementation supportDependencies.design
+    /*Constraint Layout Support Lib*/
+    implementation supportDependencies.constraintlayout
+    /*Retrofit*/
+    implementation retrofitDependencies.retrofit
+    /*Api Logging*/
+    implementation retrofitDependencies.okhttp
+    /*Moshi*/
+    implementation moshi
+    implementation retrofitDependencies.moshi
+    /*Glide*/
+    implementation gildeDependencies.gilde
+    annotationProcessor gildeDependencies.compiler
+    /*rx java */
+    implementation rxjava
+    implementation retrofitDependencies.rxAdapterJava
+    implementation rxjava2Dependencies.rxjava2
+    implementation rxjava2Dependencies.rxandroid
+    /*Timber log library*/
+    implementation timber
+    /*mockito unit test*/
+    testImplementation mockito
+    /*junit unit test*/
+    testImplementation junit
+    /*ui test & espresso test*/
+    androidTestImplementation testRunner
+    androidTestImplementation espresso
+    androidTestImplementation 'androidx.test:rules:1.2.0-alpha03'
+}
+
+androidExtensions {
+    experimental = true
+}
+
+private Integer generateVersionCode() {
+    return ext.minimumSdkVersion * 10000000 + ext.versionMajor * 10000 + ext.versionMinor * 100 + ext.versionPatch
+}
+
+private String generateVersionName() {
+    return  "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+}
+

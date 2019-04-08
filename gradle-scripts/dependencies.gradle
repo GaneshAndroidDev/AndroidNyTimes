@@ -1,0 +1,93 @@
+ext {
+
+    //Packages
+    supportPackage = 'androidx.appcompat'
+    designSupportPackage = 'com.google.android.material'
+    constraintLayoutPackage = 'androidx.constraintlayout'
+    retrofitPackage = 'com.squareup.retrofit2'
+    okhttpPackage = 'com.squareup.okhttp3'
+    moshiPackage = 'com.squareup.moshi'
+    gildePackage = 'com.github.bumptech.glide'
+    rxjavaPackage = 'io.reactivex'
+    rxjava2Package = 'io.reactivex.rxjava2'
+    timberPackage = 'com.jakewharton.timber'
+    firebasePackage = 'com.google.firebase'
+    gmsPacakge = 'com.google.android.gms'
+    fbPackage = 'com.facebook.android'
+    mockitoPackage = 'org.mockito'
+    junitPackage = 'junit'
+    androidxTestPackage = 'androidx.test'
+    espressoPackage = 'androidx.test.espresso'
+
+    //Version
+    supportVersion = '1.1.0-alpha02'
+    designSupportVersion = '1.1.0-alpha03'
+    constraintLayoutVersion = '2.0.0-alpha3'
+    retrofitVersion = '2.4.0'
+    okhttpVersion = '3.10.0'
+    moshiVersion = '1.7.0'
+    gildeVersion = '4.8.0'
+    rxjavaVersion = '1.3.4'
+    rxjava2Version = '2.1.16'
+    rrxandroidVersion = '2.0.2'
+    timberVersion = '4.7.1'
+    firebaseCoreVersion = '16.0.1'
+    firebaseAuthVersion = '16.0.3'
+    playServiceAuthVersion = '16.0.0'
+    fbLoginVersion = '4.40.0'
+    mockitoVersion = '2.19.0'
+    junitVersion = '4.12'
+    androidxTestRunnerVersion = '1.1.2-alpha01'
+    espressoVersion = '3.1.2-alpha01'
+
+    supportDependencies = [
+            design           : buildDependency(designSupportPackage, 'material', supportVersion),
+            appCompat        : buildDependency(supportPackage, 'appcompat', supportVersion),
+            constraintlayout        : buildDependency(constraintLayoutPackage, 'constraintlayout', constraintLayoutVersion)
+    ]
+
+    retrofitDependencies = [
+            retrofit     : buildDependency(retrofitPackage, 'retrofit', retrofitVersion),
+            gson         : buildDependency(retrofitPackage, 'converter-gson', retrofitVersion),
+            moshi         : buildDependency(retrofitPackage, 'converter-moshi', retrofitVersion),
+            rxAdapterJava: buildDependency(retrofitPackage, 'adapter-rxjava2', retrofitVersion),
+            okhttp: buildDependency(okhttpPackage, 'logging-interceptor', okhttpVersion)
+    ]
+
+    moshi = buildDependency(moshiPackage, 'moshi-kotlin', moshiVersion)
+
+    gildeDependencies = [
+            gilde           : buildDependency(gildePackage, 'glide', gildeVersion),
+            compiler        : buildDependency(gildePackage, 'compiler', gildeVersion)
+    ]
+
+    rxjava = buildDependency(rxjavaPackage, 'rxjava', rxjavaVersion)
+
+    rxjava2Dependencies = [
+            rxjava2           : buildDependency(rxjava2Package, 'rxjava', rxjava2Version),
+            rxandroid        : buildDependency(rxjava2Package, 'rxandroid', rrxandroidVersion)
+    ]
+
+    timber = buildDependency(timberPackage, 'timber', timberVersion)
+
+    firebaseDependencies = [
+            core           : buildDependency(firebasePackage, 'firebase-core', firebaseCoreVersion),
+            auth        : buildDependency(firebasePackage, 'firebase-auth', firebaseAuthVersion)
+    ]
+
+    gmsPlayServiceAuth = buildDependency(gmsPacakge, 'play-services-auth', playServiceAuthVersion)
+
+    fbLogin = buildDependency(fbPackage, 'facebook-login', fbLoginVersion)
+
+    mockito = buildDependency(mockitoPackage, 'mockito-core', mockitoVersion)
+
+    junit = buildDependency(junitPackage, junitPackage, junitVersion)
+
+    testRunner = buildDependency(androidxTestPackage, 'runner', androidxTestRunnerVersion)
+
+    espresso = buildDependency(espressoPackage, 'espresso-core', espressoVersion)
+}
+
+static String buildDependency(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}
